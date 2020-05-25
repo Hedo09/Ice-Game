@@ -1,0 +1,35 @@
+Deterministic or Random?
+Choose map (0 or 1)
+Should the game have a storm after the last player's round? (y/n)
+# Item>diggedUp : Item (SignalFlarePart) state has changed to 'thrownDown'
+# Item>pickedUp : Item (SignalFlarePart) state has changed to 'inHand'
+# Item>diggedUp : Item (SignalFlarePart) state has changed to 'thrownDown'
+# Item>pickedUp : Item (SignalFlarePart) state has changed to 'inHand'
+# Item>diggedUp : Item (SignalFlarePart) state has changed to 'thrownDown'
+# Item>pickedUp : Item (SignalFlarePart) state has changed to 'inHand'
+init ready
+Which direction? (w,a,s,d)
+$ Player>step : Player (PlayerId:0) Transaction 'stepping' began
+# Tile>getNeighbour : Neighbour check for Tile (0, 0) in Direction: RIGHT 
+# Tile>getNeighbour : NeighbourTile (1, 0)
+# Tile>steppedOff : Player left the Tile (0, 0)
+# Tile>steppedOn : Player stepped on Tile (1, 0)
+[ ][ ][ ][ ][ ][ ]
+[ B ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ E1 R2 E0 ][ ][ ][ ][ ]
+( E0:   InHand SFP(T), Wear: -, Temp: 5, inWater: - )
+( E1:   InHand SFP(T), Wear: -, Temp: 5, inWater: - )
+( R2:   InHand SFP(T), Wear: -, Temp: 4, inWater: - )
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+$ Player>putSignalTogether : Player (PlayerId:0) started putting together
+# SignalFlare>putTogether : Ready to win
+You win the game, Congratulations!
+$ RoundController>win : Game won, ended

@@ -1,0 +1,183 @@
+Előzetes forgatókönyvek: 
+
+GlobalControllers.RoundController Init
+
+Elkér a konténertől egy játékost 
+
+a játékosnak megüzeni, hogy start (munka 4-re, inWater check) 
+
+játékos vár inputra, 
+
+user csinál valamit (ameddig tud) 
+
+user passzol (ezzel a munkája 0-ra állítódik) 
+
+roundcontroller stormnak szól, hogy lesz-e  
+
+ 
+
+ 
+
+    ha vihar lesz: 
+
+storm sorsol x,y-kat 
+
+ezekhez tartozó tileokat lekéri LUT-tól 
+
+LUT megadja 
+
+storm hónövelést hív ezeken a tileokon 
+
+storm iglu rombolást hív ezeken a tileokon 
+
+storm LUT-tól lekéri a playereket, akik ott vannak 1-1 tileon 
+
+ha a tileon nincs iglu -> storm sebzést hív ezeken a playereken (player megnézi mehalt-e, ha igen -> vesztést hív roundControlleren) 
+
+storm visszatér 
+
+ 
+
+ 
+
+GlobalControllers.RoundController köv. játékos lépését hívja
+
+ 
+
+ 
+
+játékos lépések: 
+
+    mindegyik az elején hív egy "hasEnoughWorkPoints"-t, ez ellenőrzi, hogy a játékosnak van-e elég pontja és levonja a cost-t, ha igen 
+
+    (ez egy egyszerű kis private fgv, kb kódismétlés ellen) 
+
+ 
+
+ 
+
+    step: costs 1, irányt kap a player a step fgv-ben 
+
+    lekéri LUT-tól a saját tilet, saját tilenak odaadja az irányt steppedOff-ban 
+
+        ha unstable tile -> rajta állók számát set-eli megfelelően 
+
+        saját tile kiszámolja, ez milyen koordináta lenne, az alapján lekér egy tilet LUT-tól (getNeighbourt hív saját magán) 
+
+        (ha nincs ilyen szomszédos tile, mert pl szélen van - hibával visszadobjuk, de ez egyelőre nem lényeges) 
+
+        steppedOff visszaadja a tilet, ahova lépni akar player 
+
+    player setPosition(PlayerClasses.Player)-t hív LUT-on
+
+    player steppedOn(PlayerClasses.Player)-t hív ezen a tileon
+
+    tile típusától függően lereagálja ezt 
+
+        snowy hole: beesés, vízbe esést hív playeren -> lásd ott 
+
+        unstable: hívhat vízbeesést, megfelelően változtatja az adatait 
+
+        stable: semmi különös 
+
+ 
+
+    pickUpItem: costs 1, itemet kap a player paraméterként 
+
+        pickUp(item i) meghívódik 
+
+        megnézzük, van-e vmi kézben 
+
+        azt ledobjuk (ledobást hívunk rajta, item megfelelően beállítja magát és berakja magát LUT-ba) 
+
+        újat kézbe veszi player (inHand), azon pickUp(PlayerClasses.Player Picker)-t hívunk, új kézbeli item is beállítja magát, kiveszi magát LUT-ból
+
+            ha divingSuit - felveszi magát, ha tudja, ha nem, a földön marad 
+
+            ha kaja - evést hív magán, LUT-on valahova odagenerálja magát, enum statet állít 
+
+            playeren ateFood-ot hív, player bodyheat felmegy ezzel, inHand nullptr-re állítódik 
+
+              
+
+    digUpItem: costs 1, jégbe fagyott cuccot ás ki 
+
+        PlayerClasses.Player lekéri LUT-tól az alatta lévő tilet,
+
+        majd lekéri a tileon az itemeket 
+
+        az itemeknek diggedUp()-t küld 
+
+        erre a nem befagyott itemek nem reagálnak 
+
+        a befagyott állapotot vált 
+
+    fallInWater: 
+
+        steppedOn közben egy tile hívhatja playeren         
+
+        player leellenőrzi, van e rajta diving divingSuit 
+
+        ha nincs, inWater-t truera állítjuk és passzolunk 
+
+            a következő körig kimentik -> lásd mentés 
+
+            ha nem: meghal, loset hív RoundControlleren (cause: "PlayerClasses.Player x fell in the icy water")
+
+        ha van, adunk +1 work point-t (step miattit kiegyenlítendő) és a playernek küldünk GUI-ra egy lehetőséget, hogy hova léphet (várunk rá), ekkor a player 
+
+        step(dir)-t hív 
+
+ 
+
+    mentés: 
+
+        Tfh. h adott játékos ott van mellette (előtte step-k, stb.) 
+
+        kapunk egy savePlayers(TileClasses.Direction dir)-t
+
+        Van-e játékosnál kötél? -  
+
+        LUT-tól lekérni -> tile, amin játékos áll 
+
+        tiletól lekérni a szomszédját (tile is LUT-tól kéri le) - getNeighbour() 
+
+        Tileból players 
+
+        playereken check, hogy tényleg inWater - ha nem, akkor hiba vissza, nincs mentés 
+
+        playereket step-el átrakatjuk a mi tileunkra, inWater false 
+
+ 
+
+    hótakarítás: costs 1, user playeren hív egy clearSnow fgv-t 
+
+ 
+
+        use()-t hívunk a játékos item-jén, ásós flaggel 
+
+        Van-e a játékosnál ásó? - Visitor pattern! 
+
+    nyerés: 
+
+        A ItemClasses.SignalFlare funkciója ellenőrizni, hogy lehetséges-e ez a mozdulat,
+
+        vagyis ha a user hív playeren egy putSignalTogether(ItemClasses.SignalFlare)-t, akkor
+
+        a player ItemClasses.SignalFlare-n hív egy put together(GlobalControllers.RoundController)-t, az siker esetén (leellenőrzi, hogy minden item inHand-e és minden játékos egy mezőn áll-e) GlobalControllers.RoundController-nek küld egy win()-t, amúgy visszatér (küld egy sikertelen hibaüzenetet max, de az már GUI)
+
+ 
+
+ 
+
+used(ItemClasses.Activity, PlayerClasses.Player)-ról: Trükkös a helyzet, hogy ne kelljen instanceof()-t hívni, egy flaget állítunk be (activity enum),
+
+ami alapján a tárgy tudja, hogy ő most azt a tevékenységet el tudja-e végezni (ha menteni akarunk ásóval, az nem fog semmit csinálni), viszont fontos, hogy a megfelelő check-eket (divingSuit fel tudja-e venni magát pl), 
+
+a tárgynak kell majd elvégeznie, gyakorlatilag hozzá átsourceoltuk a tevékenységeket. 
+
+Alapvetően amit egy item nem érne el, pl LUT-ban tile (ő kézben van, nincs a LUT-ban, mi alapján kérdezne le), azt mivel megkapja Playert eléri. 
+
+ 
+
+player mindig benne van LUT-ban, item nem biztos!

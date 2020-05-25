@@ -1,0 +1,17 @@
+StartGame
+deterministic
+0
+n
+PrintItemMap
+DigItemUp
+0
+PrintItemMap
+PassRound
+Step
+d
+PrintPlayer
+PassRound
+PassRound
+PassRound
+PassRound
+PassRound

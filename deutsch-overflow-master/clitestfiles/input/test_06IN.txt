@@ -1,0 +1,11 @@
+StartGame
+deterministic
+1
+n
+step
+d
+PrintCharacterMap
+PrintPlayer
+PrintItemMap
+PutSignalTogether
+EndGame

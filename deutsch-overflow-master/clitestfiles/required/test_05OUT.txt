@@ -1,0 +1,36 @@
+Deterministic or Random?
+Choose map (0 or 1)
+Should the game have a storm after the last player's round? (y/n)
+# Item>diggedUp : Item (Rope) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Rope) state has changed to 'inHand'
+# Item>diggedUp : Item (Tent) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Tent) state has changed to 'inHand'
+# Item>diggedUp : Item (Shovel) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Shovel) state has changed to 'inHand'
+init ready
+# Player>passRound : Player (PlayerId:0) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 1
+# Player>passRound : Player (PlayerId:1) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 2
+# Player>passRound : Player (PlayerId:2) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 3
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+Tile>putOnTent : Tent built on Tile (2, 3) 'iglooOn=true'
+$ Tent>used : Transaction 'puttingTent' was successful
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ T][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]

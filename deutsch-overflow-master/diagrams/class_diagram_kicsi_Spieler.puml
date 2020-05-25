@@ -1,0 +1,93 @@
+@startuml 
+
+title Spieler - Class Diagram Teil 1
+
+Interface PlayerClasses.IControllable {
+    +void step(TileClasses.Direction dir)
+    +void pickUp(ItemClasses.Item i)
+    +void clearSnow() 
+    +void digItemUp() 
+    +void savePlayers(TileClasses.Direction dir)
+    +void putSignalTogether(ItemClasses.SignalFlare sg)
+    +void passRound() 
+}
+PlayerClasses.Player ..|> PlayerClasses.IControllable
+
+abstract class PlayerClasses.Player {
+    #int BodyHeat 
+    #int ID 
+    #int workPoints 
+    #boolean inWater 
+    #ItemClasses.Item inHand
+    #ItemClasses.Item wearing
+    +void startRound() 
+    +void fallInWater() 
+    +void ateFood() 
+    +void changeBodyHeat(signed int thisMuch) 
+    +void wear(ItemClasses.DivingSuit suit)
+    #boolean hasEnoughWorkPoints(int cost) 
+}
+PlayerClasses.Player o-- "inHand\n0..1" ItemClasses.Item
+
+class PlayerClasses.Eskimo {
+    +void buildIglu() 
+} 
+
+class PlayerClasses.Researcher {
+    +void detectCapacity(TileClasses.Direction dir)
+} 
+
+PlayerClasses.Player --> TileClasses.Direction
+
+class PlayerClasses.PlayerContainer {
+    +PlayerClasses.Player getPlayer(int pid)
+} 
+
+PlayerClasses.PlayerContainer "pid" *-- PlayerClasses.Player
+PlayerClasses.Player <|-- PlayerClasses.Eskimo
+PlayerClasses.Player <|-- PlayerClasses.Researcher
+
+enum Activities { 
+    savingPeople 
+    clearingSnow 
+    puttingOnSuit 
+    eatingFood 
+} 
+
+
+enum TileClasses.Direction {
+    up 
+    down 
+    left 
+    right 
+} 
+
+PlayerClasses.Player --> Activities
+
+class GlobalControllers.PositionLUT << (S,#FF7700) Singleton >> {
+    +TileClasses.Tile getPosition(PlayerClasses.Player p)
+    +TileClasses.Tile getPosition(ItemClasses.Item i)
+    +PlayerClasses.Player[] getPlayersOnTile(TileClasses.Tile t)
+    +ItemClasses.Item[] getItemsOnTile(TileClasses.Tile t)
+    +TileClasses.Tile getTile(int x, int y)
+    +void setPosition(PlayerClasses.Player p)
+    +void setPosition(ItemClasses.Item i)
+} 
+
+GlobalControllers.PositionLUT "\tplayerTileMap        \n\t3..6        " o--> PlayerClasses.Player
+GlobalControllers.PositionLUT "\t\ttilePlayerMap   \n\t\t3..6   " o--> PlayerClasses.Player
+
+class GlobalControllers.RoundController {
+    -int curID 
+    +void init(int playerNum) 
+    +void startNextRound() 
+    +void endLastRound()
+    +void lose(String cause) 
+    +void win() 
+    +PlayerClasses.PlayerContainer getPlayerContainer()
+} 
+
+GlobalControllers.RoundController --> "pc"PlayerClasses.PlayerContainer
+PlayerClasses.Player "roundController"--> GlobalControllers.RoundController
+
+@enduml

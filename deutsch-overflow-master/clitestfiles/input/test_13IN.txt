@@ -1,0 +1,14 @@
+StartGame
+deterministic
+0
+n
+PassRound
+PassRound
+PassRound
+step
+a
+step
+a
+PassRound
+PassRound
+PassRound

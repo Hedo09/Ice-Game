@@ -1,0 +1,65 @@
+Deterministic or Random?
+Choose map (0 or 1)
+Should the game have a storm after the last player's round? (y/n)
+# Item>diggedUp : Item (Rope) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Rope) state has changed to 'inHand'
+# Item>diggedUp : Item (Tent) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Tent) state has changed to 'inHand'
+# Item>diggedUp : Item (Shovel) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Shovel) state has changed to 'inHand'
+init ready
+# Player>passRound : Player (PlayerId:0) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 1
+# Player>passRound : Player (PlayerId:1) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 2
+# Player>passRound : Player (PlayerId:2) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 3
+# Player>passRound : Player (PlayerId:3) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 4
+[ E0 ][ ][ R2 ][ ][ ][ ]
+[ B ][ E1 ][ ][ R4 ][ ][ ]
+[ ][ ][ R3 ][ ][ R5 ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+( E0:   InHand -, Wear: -, Temp: 5, inWater: - )
+( E1:   InHand -, Wear: -, Temp: 5, inWater: - )
+( R2:   InHand R(T), Wear: -, Temp: 4, inWater: - )
+( R3:   InHand T(T), Wear: -, Temp: 4, inWater: - )
+( R4:   InHand -, Wear: -, Temp: 4, inWater: - )
+( R5:   InHand S(T), Wear: -, Temp: 4, inWater: - )
+[ F(F) ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ D(F) ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ SFP(F) ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+0: D(F)
+Which item? 0-0
+# Item>diggedUp : Item (DivingSuit) state has changed to 'thrownDown'
+$ Player>digItemUp : Player (PlayerId:4) 'digItemUp' is completed
+0: D(T)
+Which item? 0-0
+$ Player>wear : Player (PlayerId:4) now wears DivingSuit
+$ DivingSuit>pickedUp : Transaction 'pickingUpDivingSuit' was successful
+$ Player>pickUp : Player (PlayerId:4) picked up item
+( E0:   InHand -, Wear: -, Temp: 5, inWater: - )
+( E1:   InHand -, Wear: -, Temp: 5, inWater: - )
+( R2:   InHand R(T), Wear: -, Temp: 4, inWater: - )
+( R3:   InHand T(T), Wear: -, Temp: 4, inWater: - )
+( R4:   InHand -, Wear: +, Temp: 4, inWater: - )
+( R5:   InHand S(T), Wear: -, Temp: 4, inWater: - )
+[ F(F) ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ D(T) ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ SFP(F) ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]

@@ -1,0 +1,14 @@
+StartGame
+deterministic
+0
+n
+PrintCharacterMap
+PrintPlayer
+PrintItemMap
+DigItemUp
+0
+PickUp
+0
+PrintPlayer
+PrintItemMap
+EndGame

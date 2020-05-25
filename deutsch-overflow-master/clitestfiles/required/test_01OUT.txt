@@ -1,0 +1,50 @@
+Deterministic or Random?
+Choose map (0 or 1)
+Should the game have a storm after the last player's round? (y/n)
+# Item>diggedUp : Item (Rope) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Rope) state has changed to 'inHand'
+# Item>diggedUp : Item (Tent) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Tent) state has changed to 'inHand'
+# Item>diggedUp : Item (Shovel) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Shovel) state has changed to 'inHand'
+init ready
+[ E0 ][ ][ R2 ][ ][ ][ ]
+[ B ][ E1 ][ ][ R4 ][ ][ ]
+[ ][ ][ R3 ][ ][ R5 ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+( E0:   InHand -, Wear: -, Temp: 5, inWater: - )
+( E1:   InHand -, Wear: -, Temp: 5, inWater: - )
+( R2:   InHand R(T), Wear: -, Temp: 4, inWater: - )
+( R3:   InHand T(T), Wear: -, Temp: 4, inWater: - )
+( R4:   InHand -, Wear: -, Temp: 4, inWater: - )
+( R5:   InHand S(T), Wear: -, Temp: 4, inWater: - )
+[ F(F) ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ D(F) ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ SFP(F) ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+0: F(F)
+Which item? 0-0
+# Item>diggedUp : Item (Food) state has changed to 'thrownDown'
+$ Player>digItemUp : Player (PlayerId:0) 'digItemUp' is completed
+0: F(T)
+Which item? 0-0
+# Player>changeBodyHeat : Player (PlayerId:0) bodyHeat is changed to 6 (by 1 much)
+$ Player>ateFood : Player (PlayerId:0) ate the Food 
+$ Food>pickedUp : Transaction 'pickUp' and 'ateFood' was successful
+$ Player>pickUp : Player (PlayerId:0) picked up item
+( E0:   InHand -, Wear: -, Temp: 6, inWater: - )
+( E1:   InHand -, Wear: -, Temp: 5, inWater: - )
+( R2:   InHand R(T), Wear: -, Temp: 4, inWater: - )
+( R3:   InHand T(T), Wear: -, Temp: 4, inWater: - )
+( R4:   InHand -, Wear: -, Temp: 4, inWater: - )
+( R5:   InHand S(T), Wear: -, Temp: 4, inWater: - )
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ D(F) ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ F(F) ][ SFP(F) ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]

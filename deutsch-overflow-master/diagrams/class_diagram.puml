@@ -1,0 +1,183 @@
+ 
+@startuml 
+
+title Eisfeld - Class Diagram 
+
+Interface PlayerClasses.IControllable {
+    +void step(TileClasses.Direction dir)
+    +void pickUp(ItemClasses.Item i)
+    +void clearSnow() 
+    +void digItemUp() 
+    +void savePlayers(TileClasses.Direction dir)
+    +void putSignalTogether(ItemClasses.SignalFlare sg)
+    +void passRound() 
+}
+PlayerClasses.Player ..|> PlayerClasses.IControllable
+
+abstract class PlayerClasses.Player {
+    #int BodyHeat 
+    #int ID 
+    #int workPoints 
+    #boolean inWater 
+    #ItemClasses.Item wearing
+    +void startRound() 
+    +void fallInWater() 
+    +void ateFood() 
+    +void changeBodyHeat(signed int thisMuch) 
+    +void wear(ItemClasses.DivingSuit suit)
+    #boolean hasEnoughWorkPoints(int cost) 
+}
+
+PlayerClasses.Player o-- "inHand\n0..1" ItemClasses.Item
+
+class PlayerClasses.Eskimo {
+    +void buildIglu() 
+} 
+
+class PlayerClasses.Researcher {
+    +void detectCapacity(TileClasses.Direction dir)
+} 
+
+PlayerClasses.Player --> TileClasses.Direction
+
+class PlayerClasses.PlayerContainer {
+    +PlayerClasses.Player getPlayer(int pid)
+} 
+
+PlayerClasses.PlayerContainer "pid" *-- PlayerClasses.Player
+PlayerClasses.Player <|-- PlayerClasses.Eskimo
+PlayerClasses.Player <|-- PlayerClasses.Researcher
+
+class SnowStorm.SnowStorm {
+    +void tryStorm() 
+} 
+
+enum Activities { 
+    savingPeople 
+    clearingSnow 
+    puttingOnSuit 
+    eatingFood 
+} 
+
+abstract class ItemClasses.Item {
+    +void thrownDown() 
+    +void pickedUp(PlayerClasses.Player Picker)
+    +void diggedUp() 
+    +void used(PlayerClasses.Player p, ItemClasses.Activity a)
+} 
+
+class ItemClasses.Food {
+    +void used(PlayerClasses.Player p, ItemClasses.Activity a) <<override>>
+} 
+
+class ItemClasses.Rope {
+    +void used(PlayerClasses.Player p, ItemClasses.Activity a) <<override>>
+} 
+
+class ItemClasses.Shovel {
+    +void used(PlayerClasses.Player p, ItemClasses.Activity a) <<override>>
+} 
+
+class ItemClasses.DivingSuit {
+    +void used(PlayerClasses.Player p, ItemClasses.Activity a) <<override>>
+} 
+
+class ItemClasses.SignalFlarePart {
+    -int partID 
+    +void used(PlayerClasses.Player p, ItemClasses.Activity a) <<override>>
+} 
+
+ItemClasses.Item <|-- ItemClasses.SignalFlarePart
+ItemClasses.Item <|-left- ItemClasses.Food
+ItemClasses.Item <|-left- ItemClasses.Rope
+ItemClasses.Item <|-left- ItemClasses.Shovel
+ItemClasses.Item <|-left- ItemClasses.DivingSuit
+
+class ItemClasses.SignalFlare {
+    +void putTogether(GlobalControllers.RoundController rc)
+} 
+
+ItemClasses.SignalFlarePart "3"--* ItemClasses.SignalFlare
+ItemClasses.SignalFlare ..> GlobalControllers.RoundController
+ItemClasses.SignalFlare --> GlobalControllers.PositionLUT
+
+abstract class TileClasses.Tile {
+    #int x 
+    #int y 
+    #int snow 
+    -boolean igluOn 
+    +void steppedOn(PlayerClasses.Player p)
+    +void steppedOff(TileClasses.Direction dir)
+    +int changeSnow(signed int thisMuch) 
+    +TileClasses.Tile getNeighbour(TileClasses.Direction dir)
+    +void destroyIglu()
+    +void buildIglu()
+} 
+
+class TileClasses.StableTile
+class TileClasses.UnstableTile {
+    -int capacity 
+    +int standingHere 
+} 
+
+class TileClasses.SnowyHole
+
+TileClasses.Tile <|-- TileClasses.StableTile
+TileClasses.Tile <|-- TileClasses.UnstableTile
+TileClasses.Tile <|-- TileClasses.SnowyHole
+TileClasses.Tile ..> PlayerClasses.Player
+
+enum TileClasses.Direction {
+    up 
+    down 
+    left 
+    right 
+} 
+
+enum ItemClasses.ItemState {
+    frozen 
+    inHand 
+    thrownDown 
+} 
+
+ItemClasses.Item -down-> ItemClasses.ItemState
+TileClasses.Tile --> TileClasses.Direction
+ItemClasses.Item ..> PlayerClasses.Player
+PlayerClasses.Player --> Activities
+
+class GlobalControllers.PositionLUT << (S,#FF7700) Singleton >> {
+    +TileClasses.Tile getPosition(PlayerClasses.Player p)
+    +TileClasses.Tile getPosition(ItemClasses.Item i)
+    +PlayerClasses.Player[] getPlayersOnTile(TileClasses.Tile t)
+    +ItemClasses.Item[] getItemsOnTile(TileClasses.Tile t)
+    +TileClasses.Tile getTile(int x, int y)
+    +void setPosition(PlayerClasses.Player p)
+    +void setPosition(ItemClasses.Item i)
+} 
+
+GlobalControllers.PositionLUT "\tplayerTileMap        \n\t3..6        " o--> PlayerClasses.Player
+GlobalControllers.PositionLUT "\t\ttilePlayerMap   \n\t\t3..6   " o--> PlayerClasses.Player
+GlobalControllers.PositionLUT "tileList\nTILESNUM" *-- TileClasses.Tile
+GlobalControllers.PositionLUT "itemTileMap\t\n0..7\t\t" o-- ItemClasses.Item
+GlobalControllers.PositionLUT "tileItemMap\n0..7" o-- ItemClasses.Item
+
+class GlobalControllers.RoundController {
+    -int curID 
+    +void init(int playerNum) 
+    +void startNextRound() 
+    +void endLastRound()
+    +void lose(String cause) 
+    +void win() 
+    +PlayerClasses.PlayerContainer getPlayerContainer()
+} 
+
+GlobalControllers.RoundController --> "ss"SnowStorm.SnowStorm
+GlobalControllers.RoundController --> "pc"PlayerClasses.PlayerContainer
+GlobalControllers.RoundController --> "it"ItemClasses.Item
+GlobalControllers.RoundController --> "t"TileClasses.Tile
+GlobalControllers.RoundController --> "sg"ItemClasses.SignalFlare
+PlayerClasses.Player "roundController"--> GlobalControllers.RoundController
+SnowStorm.SnowStorm --> GlobalControllers.PositionLUT
+SnowStorm.SnowStorm ..> PlayerClasses.Player
+
+@enduml

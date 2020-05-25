@@ -1,0 +1,216 @@
+Deterministic or Random?
+Choose map (0 or 1)
+Should the game have a storm after the last player's round? (y/n)
+# Item>diggedUp : Item (Rope) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Rope) state has changed to 'inHand'
+# Item>diggedUp : Item (Tent) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Tent) state has changed to 'inHand'
+# Item>diggedUp : Item (Shovel) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Shovel) state has changed to 'inHand'
+init ready
+[ E0 ][ ][ R2 ][ ][ ][ ]
+[ B ][ E1 ][ ][ R4 ][ ][ ]
+[ ][ ][ R3 ][ ][ R5 ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+# Eskimo>buildIgloo : started by PlayerID: 0
+$ Tile>buildIgloo : Transaction 'buildIgloo' is completed. Igloo built on Tile (0, 5) 'iglooOn=true'
+# Eskimo>buildIgloo : ended
+[ I][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+# Player>passRound : Player (PlayerId:0) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 1
+# Player>passRound : Player (PlayerId:1) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 2
+# Player>passRound : Player (PlayerId:2) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 3
+Tile>putOnTent : Tent built on Tile (2, 3) 'iglooOn=true'
+$ Tent>used : Transaction 'puttingTent' was successful
+[ I][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ T][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+# Player>passRound : Player (PlayerId:3) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 4
+[ I][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ T][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+# Player>passRound : Player (PlayerId:4) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 5
+# Player>passRound : Player (PlayerId:5) passed round
+# RoundController>endLastRound : Round end started
+# SnowStorm>tryStorm : SnowStorm is coming
+RoundController>checkTent : Tent is destroyed (reason: storm)
+# Tile>ChangeSnow : Tile(2, 3) snow level is: 1 (it has been changed by 1 much)
+# Tile>destroyIgloo : Igloo destroyed from Tile (0, 5)'iglooOn=false'
+# Tile>ChangeSnow : Tile(0, 5) snow level is: 1 (it has been changed by 1 much)
+# SnowStorm>tryStorm : The storm is done
+# RoundController>endLastRound : PolarBear goes to a hunt
+# Tile>getNeighbour : Neighbour check for Tile (0, 4) in Direction: DOWN 
+# Tile>getNeighbour : NeighbourTile (0, 3)
+$ PolarBear>step : Transaction 'PolarBearSteps' is completed
+! PolarBear>hunt : Bear has found no prey on his new Tile
+! PolarBear>hunt : Hunting has ended
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 0
+# Player>passRound : Player (PlayerId:0) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 1
+# Player>passRound : Player (PlayerId:1) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 2
+# Player>passRound : Player (PlayerId:2) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 3
+# Player>passRound : Player (PlayerId:3) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 4
+# Player>passRound : Player (PlayerId:4) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 5
+# Player>passRound : Player (PlayerId:5) passed round
+# RoundController>endLastRound : Round end started
+# SnowStorm>tryStorm : SnowStorm is coming
+# SnowStorm>tryStorm : player
+# Player>changeBodyHeat : Player (PlayerId:3) bodyHeat is changed to 3 (by -1 much)
+# Tile>ChangeSnow : Tile(2, 3) snow level is: 1 (it has been changed by 1 much)
+# SnowStorm>tryStorm : player
+# Player>changeBodyHeat : Player (PlayerId:0) bodyHeat is changed to 4 (by -1 much)
+# Tile>ChangeSnow : Tile(0, 5) snow level is: 1 (it has been changed by 1 much)
+# SnowStorm>tryStorm : The storm is done
+# RoundController>endLastRound : PolarBear goes to a hunt
+# Tile>getNeighbour : Neighbour check for Tile (0, 3) in Direction: DOWN 
+# Tile>getNeighbour : NeighbourTile (0, 2)
+$ PolarBear>step : Transaction 'PolarBearSteps' is completed
+! PolarBear>hunt : Bear has found no prey on his new Tile
+! PolarBear>hunt : Hunting has ended
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 0
+# Player>passRound : Player (PlayerId:0) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 1
+# Player>passRound : Player (PlayerId:1) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 2
+# Player>passRound : Player (PlayerId:2) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 3
+# Player>passRound : Player (PlayerId:3) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 4
+# Player>passRound : Player (PlayerId:4) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 5
+# Player>passRound : Player (PlayerId:5) passed round
+# RoundController>endLastRound : Round end started
+# SnowStorm>tryStorm : SnowStorm is coming
+# SnowStorm>tryStorm : player
+# Player>changeBodyHeat : Player (PlayerId:3) bodyHeat is changed to 2 (by -1 much)
+# Tile>ChangeSnow : Tile(2, 3) snow level is: 1 (it has been changed by 1 much)
+# SnowStorm>tryStorm : player
+# Player>changeBodyHeat : Player (PlayerId:0) bodyHeat is changed to 3 (by -1 much)
+# Tile>ChangeSnow : Tile(0, 5) snow level is: 1 (it has been changed by 1 much)
+# SnowStorm>tryStorm : The storm is done
+# RoundController>endLastRound : PolarBear goes to a hunt
+# Tile>getNeighbour : Neighbour check for Tile (0, 2) in Direction: DOWN 
+# Tile>getNeighbour : NeighbourTile (0, 1)
+$ PolarBear>step : Transaction 'PolarBearSteps' is completed
+! PolarBear>hunt : Bear has found no prey on his new Tile
+! PolarBear>hunt : Hunting has ended
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 0
+# Player>passRound : Player (PlayerId:0) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 1
+# Player>passRound : Player (PlayerId:1) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 2
+# Player>passRound : Player (PlayerId:2) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 3
+# Player>passRound : Player (PlayerId:3) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 4
+# Player>passRound : Player (PlayerId:4) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 5
+# Player>passRound : Player (PlayerId:5) passed round
+# RoundController>endLastRound : Round end started
+# SnowStorm>tryStorm : SnowStorm is coming
+# SnowStorm>tryStorm : player
+# Player>changeBodyHeat : Player (PlayerId:3) bodyHeat is changed to 1 (by -1 much)
+# Tile>ChangeSnow : Tile(2, 3) snow level is: 1 (it has been changed by 1 much)
+# SnowStorm>tryStorm : player
+# Player>changeBodyHeat : Player (PlayerId:0) bodyHeat is changed to 2 (by -1 much)
+# Tile>ChangeSnow : Tile(0, 5) snow level is: 1 (it has been changed by 1 much)
+# SnowStorm>tryStorm : The storm is done
+# RoundController>endLastRound : PolarBear goes to a hunt
+# Tile>getNeighbour : Neighbour check for Tile (0, 1) in Direction: DOWN 
+# Tile>getNeighbour : NeighbourTile (0, 0)
+$ PolarBear>step : Transaction 'PolarBearSteps' is completed
+! PolarBear>hunt : Bear has found no prey on his new Tile
+! PolarBear>hunt : Hunting has ended
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 0
+# Player>passRound : Player (PlayerId:0) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 1
+# Player>passRound : Player (PlayerId:1) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 2
+# Player>passRound : Player (PlayerId:2) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 3
+# Player>passRound : Player (PlayerId:3) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 4
+# Player>passRound : Player (PlayerId:4) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 5
+# Player>passRound : Player (PlayerId:5) passed round
+# RoundController>endLastRound : Round end started
+# SnowStorm>tryStorm : SnowStorm is coming
+# SnowStorm>tryStorm : player
+# Player>changeBodyHeat : Player (PlayerId:3) bodyHeat is changed to 0 (by -1 much)
+! RoundController>lose : You lose the game, cause: Hypothermia
+$ RoundController>lose : Game lost, ended

@@ -1,0 +1,76 @@
+Deterministic or Random?
+Choose map (0 or 1)
+Should the game have a storm after the last player's round? (y/n)
+# Item>diggedUp : Item (Rope) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Rope) state has changed to 'inHand'
+# Item>diggedUp : Item (Tent) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Tent) state has changed to 'inHand'
+# Item>diggedUp : Item (Shovel) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Shovel) state has changed to 'inHand'
+init ready
+[ F(F) ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ D(F) ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ SFP(F) ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+0: F(F)
+Which item? 0-0
+# Item>diggedUp : Item (Food) state has changed to 'thrownDown'
+$ Player>digItemUp : Player (PlayerId:0) 'digItemUp' is completed
+[ F(T) ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ D(F) ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ SFP(F) ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ SFP(F) ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+# Player>passRound : Player (PlayerId:0) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 1
+Which direction? (w,a,s,d)
+$ Player>step : Player (PlayerId:1) Transaction 'stepping' began
+# Tile>getNeighbour : Neighbour check for Tile (1, 4) in Direction: RIGHT 
+# Tile>getNeighbour : NeighbourTile (2, 4)
+# Tile>steppedOff : Player left the Tile (1, 4)
+# SnowyHole>steppedOn : Stepped on SnowyHole(2, 4)
+# Player>fallInWater : Player (PlayerId:1) falls in Water 
+# Player>fallInWater : Player (PlayerId:1) has to wait for rescue 
+# Player>passRound : Player (PlayerId:1) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 2
+( E0:   InHand -, Wear: -, Temp: 5, inWater: - )
+( E1:   InHand -, Wear: -, Temp: 5, inWater: + )
+( R2:   InHand R(T), Wear: -, Temp: 4, inWater: - )
+( R3:   InHand T(T), Wear: -, Temp: 4, inWater: - )
+( R4:   InHand -, Wear: -, Temp: 4, inWater: - )
+( R5:   InHand S(T), Wear: -, Temp: 4, inWater: - )
+# Player>passRound : Player (PlayerId:2) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 3
+# Player>passRound : Player (PlayerId:3) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 4
+# Player>passRound : Player (PlayerId:4) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 5
+# Player>passRound : Player (PlayerId:5) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : PolarBear goes to a hunt
+# Tile>getNeighbour : Neighbour check for Tile (0, 4) in Direction: DOWN 
+# Tile>getNeighbour : NeighbourTile (0, 3)
+$ PolarBear>step : Transaction 'PolarBearSteps' is completed
+! PolarBear>hunt : Bear has found no prey on his new Tile
+! PolarBear>hunt : Hunting has ended
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 0
+# Player>passRound : Player (PlayerId:0) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 1
+! RoundController>lose : You lose the game, cause: A player froze in the water
+$ RoundController>lose : Game lost, ended

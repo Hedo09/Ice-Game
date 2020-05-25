@@ -1,0 +1,12 @@
+StartGame
+deterministic
+0
+n
+PassRound
+PassRound
+UseSkill
+d
+PrintTile
+3
+5
+EndGame

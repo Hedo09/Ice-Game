@@ -1,0 +1,117 @@
+@startuml 
+
+title Eisfeld - Class Diagram 
+
+Interface IControllable {
+    +void step(Direction dir) 
+    +void pickUp(Item i) 
+    +void clearSnow() 
+    +void digItemUp() 
+    +void savePlayers(Direction dir) 
+    +void putSignalTogether(SignalFlare sg) 
+    +void passRound() 
+}
+Player ..|> IControllable
+
+abstract class Player { 
+    #int BodyHeat 
+    #int ID 
+    #int workPoints 
+    #boolean inWater 
+    #Item wearing 
+    +void startRound() 
+    +void fallInWater() 
+    +void ateFood() 
+    +void changeBodyHeat(signed int thisMuch) 
+    +void wear(DivingSuit suit) 
+    #boolean hasEnoughWorkPoints(int cost) 
+    +void dropFragileShovel()
+}
+
+abstract class Character{
+    +void step(Direction dir);
+}
+
+
+class Eskimo { 
+    -int BodyHeat = 5 
+    +void buildIglu() 
+} 
+
+class Researcher { 
+    -int BodyHeat = 4 
+    +void detectCapacity(Direction dir) 
+}
+
+class PolarBear{
+    +void step(Direction dir)
+}
+
+Player --> Direction 
+
+class PlayerContainer { 
+    +Player getPlayer(int pid) 
+} 
+
+PlayerContainer "pid" *-- Player 
+Player <|-- Eskimo 
+Player <|-- Researcher 
+Character <|-- PolarBear
+Character<|-- Player
+
+
+enum Activities { 
+    savingPeople 
+    clearingSnow 
+    puttingOnSuit 
+    eatingFood 
+} 
+
+enum Direction { 
+    up 
+    down 
+    left 
+    right 
+    here
+    
+    +Direction valueOf(int direction)
+    +int valueOf(Direction dir)
+    +getValue()
+} 
+
+
+Player --> Activities 
+
+class PositionLUT << (S,#FF7700) Singleton >> { 
+    +Tile getPosition(Player p) 
+    +Tile getPosition(Item i) 
+    +Player[] getPlayersOnTile(Tile t) 
+    +Item[] getItemsOnTile(Tile t) 
+    +Tile getTile(int x, int y) 
+    +void setPosition(Player p) 
+    +void setPosition(Item i) 
+    +void setPosition(PolarBear pb)
+    +Tile getPosition(PolarBear pb)
+} 
+
+PositionLUT "\tplayerTileMap        \n\t3..6        " o--> Player 
+PositionLUT "\t\ttilePlayerMap   \n\t\t3..6   " o--> Player 
+
+
+class RoundController { 
+    -int curID 
+    +void init(int playerNum) 
+    +void startNextRound() 
+    +void endLastRound()
+    +void lose(String cause) 
+    +void win() 
+    +PlayerContainer getPlayerContainer() 
+    +void checkTent()
+} 
+
+RoundController --> "pc"PlayerContainer 
+RoundController --> "polarbear"PolarBear
+Player "roundController"--> RoundController 
+
+
+@enduml

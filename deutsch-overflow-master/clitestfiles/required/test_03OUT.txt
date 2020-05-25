@@ -1,0 +1,61 @@
+Deterministic or Random?
+Choose map (0 or 1)
+Should the game have a storm after the last player's round? (y/n)
+# Item>diggedUp : Item (Rope) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Rope) state has changed to 'inHand'
+# Item>diggedUp : Item (Tent) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Tent) state has changed to 'inHand'
+# Item>diggedUp : Item (Shovel) state has changed to 'thrownDown'
+# Item>pickedUp : Item (Shovel) state has changed to 'inHand'
+init ready
+# Player>passRound : Player (PlayerId:0) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 1
+Which direction? (w,a,s,d)
+$ Player>step : Player (PlayerId:1) Transaction 'stepping' began
+# Tile>getNeighbour : Neighbour check for Tile (1, 4) in Direction: RIGHT 
+# Tile>getNeighbour : NeighbourTile (2, 4)
+# Tile>steppedOff : Player left the Tile (1, 4)
+# SnowyHole>steppedOn : Stepped on SnowyHole(2, 4)
+# Player>fallInWater : Player (PlayerId:1) falls in Water 
+# Player>fallInWater : Player (PlayerId:1) has to wait for rescue 
+# Player>passRound : Player (PlayerId:1) passed round
+# RoundController>endLastRound : Round end started
+# RoundController>endLastRound : Round end ended
+# Player>startRound : next Player is 2
+[ E0 ][ ][ R2 ][ ][ ][ ]
+[ B ][ ][ E1 ][ R4 ][ ][ ]
+[ ][ ][ R3 ][ ][ R5 ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+( E0:   InHand -, Wear: -, Temp: 5, inWater: - )
+( E1:   InHand -, Wear: -, Temp: 5, inWater: + )
+( R2:   InHand R(T), Wear: -, Temp: 4, inWater: - )
+( R3:   InHand T(T), Wear: -, Temp: 4, inWater: - )
+( R4:   InHand -, Wear: -, Temp: 4, inWater: - )
+( R5:   InHand S(T), Wear: -, Temp: 4, inWater: - )
+Which direction? (w,a,s,d)
+$ Player>savePlayers : Player (PlayerId:2) save started in direction:DOWN
+# Tile>getNeighbour : Neighbour check for Tile (2, 5) in Direction: DOWN 
+# Tile>getNeighbour : NeighbourTile (2, 4)
+$ Player>pullOut : Player (PlayerId:1) Transaction 'pulling out' began
+# Tile>getNeighbour : Neighbour check for Tile (2, 4) in Direction: UP 
+# Tile>getNeighbour : NeighbourTile (2, 5)
+# Tile>steppedOff : Player left the Tile (2, 4)
+# Tile>steppedOn : Player stepped on Tile (2, 5)
+$ Rope>used : Transaction 'savingPeople' was successful
+$ Player>savePlayers : Player (PlayerId:2)'s save ended
+[ E0 ][ ][ R2 E1 ][ ][ ][ ]
+[ B ][ ][ ][ R4 ][ ][ ]
+[ ][ ][ R3 ][ ][ R5 ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+[ ][ ][ ][ ][ ][ ]
+( E0:   InHand -, Wear: -, Temp: 5, inWater: - )
+( E1:   InHand -, Wear: -, Temp: 5, inWater: - )
+( R2:   InHand R(T), Wear: -, Temp: 4, inWater: - )
+( R3:   InHand T(T), Wear: -, Temp: 4, inWater: - )
+( R4:   InHand -, Wear: -, Temp: 4, inWater: - )
+( R5:   InHand S(T), Wear: -, Temp: 4, inWater: - )
